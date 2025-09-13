@@ -20,7 +20,6 @@ export function getHourlyWeatherState(
   temperatures: number[],
   selectedDay: string
 ): Hourlytype[] {
-
   if (!dates?.length) {
     return Array(8).fill({
       temperature: null,
@@ -93,7 +92,7 @@ export function getWeatherImagePath(code: number) {
   switch (code) {
     case 0:
     case 1:
-      return "/assets/images/sunny.webp";
+      return "/assets/images/icon-sunny.webp";
     case 2:
       return "/assets/images/icon-partly-cloudy.webp";
     case 3:
