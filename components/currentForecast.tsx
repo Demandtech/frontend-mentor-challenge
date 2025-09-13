@@ -15,17 +15,17 @@ function CurrentForecast({
 }) {
   const { state } = useApp();
 
-
   return (
     <div>
       {isLoading ? (
         <CurrentForecastLoader />
       ) : (
-        <Card className={`bg-today bg-no-repeat bg-center h-[236px] relative`}>
+        <Card className={`lg:h-[236px] rounded-[26px] relative overflow-hidden`}>
           <Image
             removeWrapper
             src="/assets/images/bg-today-large.svg"
-            className="h-full w-full"
+            className="h-full w-full object-cover rounded-large"
+            srcSet="/assets/images/bg-today-small.svg 600w, /assets/images/bg-today-large.svg 1200w"
           />
           <CardBody className="px-5 items-center flex-row z-10 absolute top-1/2 -translate-y-1/2">
             <div className="my-auto flex w-full justify-between items-center flex-col md:flex-row gap-5">

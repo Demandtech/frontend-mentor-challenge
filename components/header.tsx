@@ -100,7 +100,7 @@ function Header() {
   return (
     <header>
       <div className="flex items-center justify-between w-full">
-        <div className="relative w-full max-w-[170px] h-[80px]">
+        <div className="relative w-full max-w-[170px]">
           <Image
             alt="Website(Weather Now) Logo"
             src={"/assets/images/logo.svg"}
