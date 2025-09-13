@@ -1,0 +1,83 @@
+@import "tailwindcss";
+
+@config "../tailwind.config.js";
+
+:root {
+  --background: hsl(243, 96%, 9%);
+  --foreground: hsl(0, 0%, 100%);
+  --blue-500: hsl(233, 67%, 56%);
+  --blue-700: hsl(248, 70%, 36%);
+  --orange-500: hsl(28, 100%, 52%);
+  --neutral-900: hsl(243, 96%, 9%);
+  --neutral-800: hsl(243, 27%, 20%);
+  --neutral-700: hsl(243, 23%, 24%);
+  --neutral-600: hsl(243, 23%, 30%);
+  --neutral-300: hsl(240, 6%, 70%);
+  --neutral-200: hsl(250, 6%, 84%);
+  --neutral: hsl(0, 0%, 100%);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-blue-500: var(--blue-500);
+  --color-blue-700: var(--blue-700);
+  --color-neutral-200: var(--neutral-200);
+  --color-neutral-300: var(--neutral-300);
+  --color-neutral-600: var(--neutral-600);
+  --color-neutral-700: var(--neutral-700);
+  --color-neutral-800: var(--neutral-800);
+  --color-neutral-900: var(--neutral-900);
+  --color-orange-500: var(--orange-500) --font-sans: var(--font-sans);
+  --font-brico: var(--font-brico);
+  --color-secondary: var(--blue-500);
+  --color-primary: var(--color-neutral-700);
+}
+
+.bg-today {
+  @apply bg-[url('/assets/images/bg-today-small.svg')] md:bg-[url('/assets/images/bg-today-large.svg')] bg-cover bg-center;
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 8px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: var(--neutral-600);
+  border-radius: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: var(--neutral-800);
+  border-radius: 4px;
+  border: 2px solid var(--neutral-600);
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background-color: var(--neutral-900);
+}
+
+@keyframes bounce-high {
+  0%,
+  80%,
+  100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-1rem); /* adjust bounce height */
+  }
+}
+
+.animate-bounce-high {
+  animation: bounce-high 1.2s infinite ease-in-out;
+}
+
+.delay-0 {
+  animation-delay: 0s;
+}
+.delay-1 {
+  animation-delay: 0.2s;
+}
+.delay-2 {
+  animation-delay: 0s;
+}
