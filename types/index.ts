@@ -24,6 +24,7 @@ export type CurrentType = {
   relative_humidity_2m: number;
   wind_speed_10m: number;
   precipitation: number;
+  weather_code: number;
 };
 
 export type DailyType = {
@@ -39,4 +40,4 @@ export type Hourlytype = {
   temperature: number;
   image_path: string;
   image_alt: string;
-}
+};

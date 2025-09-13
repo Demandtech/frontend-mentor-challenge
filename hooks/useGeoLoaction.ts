@@ -14,8 +14,6 @@ export function useGetPlaces(debouncedSearch: string) {
 
       const data = await resp.json();
 
-      console.log(data);
-
       return data.results ?? [];
     },
     enabled: false,

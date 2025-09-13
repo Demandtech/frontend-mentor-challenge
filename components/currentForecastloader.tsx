@@ -3,7 +3,7 @@ import { Card, CardBody } from "@heroui/card";
 function CurrentForecastLoader() {
   return (
     <Card
-      className={`bg-neutral-800  bg-no-repeat bg-center py-10 lg:py-16 lg:min-h-[300px]`}
+      className={`bg-neutral-800  bg-no-repeat bg-center py-10 lg:py-16 lg:min-h-[236px]`}
     >
       <CardBody className="px-5 items-center flex-row">
         <div className="flex flex-col items-center justify-center w-full gap-1">

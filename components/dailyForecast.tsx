@@ -14,13 +14,19 @@ interface DailyForecastProps {
 }
 
 function DailyForecast({ isLoading, daily }: DailyForecastProps) {
-
   const forecastData = getDailyWeatherState(
     daily?.time,
     daily?.weather_code,
     daily?.temperature_2m_min,
     daily?.temperature_2m_max
   );
+
+  const emptyForcast = Array(7).fill({
+    day: "",
+    image_path: "",
+    image_alt: "",
+    temperature: null,
+  });
 
   return (
     <div>
@@ -29,7 +35,7 @@ function DailyForecast({ isLoading, daily }: DailyForecastProps) {
           Daily forecast
         </h5>
         <div className="grid grid-cols-3 md:grid-cols-7 gap-3">
-          {(forecastData ?? ["", "", "", "", "", "", ""]).map((item, index) => (
+          {(forecastData ?? emptyForcast).map((item, index) => (
             <div key={String(index + "--key")}>
               <DayCard isLoading={isLoading} day_forcast={item} />
             </div>

@@ -57,11 +57,11 @@ export function AppProvider({ children }: { children: ReactNode }) {
     navigator.geolocation.getCurrentPosition(
       (position) => {
         const { latitude, longitude } = position.coords;
-        console.log({ latitude, longitude });
+     
         dispatch({ type: "SET_LOCATION", payload: { latitude, longitude } });
       },
       (err) => {
-        console.log("HERE??");
+       
         console.error("Geolocation error", err);
         setIsLoading(false);
         setIsError(true);
@@ -69,7 +69,7 @@ export function AppProvider({ children }: { children: ReactNode }) {
     );
   }, []);
 
-  console.log(isLoading);
+ 
 
   return (
     <AppContext.Provider

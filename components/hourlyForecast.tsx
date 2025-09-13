@@ -24,7 +24,9 @@ interface HourlyForecastProps {
 }
 
 function HourlyForecast({ isLoading, hourly }: HourlyForecastProps) {
-  const [selected, setSelected] = useState<Selection>(new Set(["mon"]));
+  const todayName = new Date().toLocaleDateString("en-US", { weekday: "long" });
+  const todayKey = days.find((d) => d.label === todayName)?.key ?? "mon";
+  const [selected, setSelected] = useState<Selection>(new Set([todayKey]));
 
   const selectedValue = useMemo(() => {
     const key = Array.from(selected)[0];
@@ -39,8 +41,15 @@ function HourlyForecast({ isLoading, hourly }: HourlyForecastProps) {
     selectedValue
   );
 
+  const emptyForecast = Array(8).fill({
+    temperature: null,
+    image_path: "",
+    image_alt: "",
+    time: "",
+  });
+
   return (
-    <Card className="bg-neutral-800 lg:p-2">
+    <Card className="bg-neutral-800 py-[0.56rem] px-2">
       <CardHeader className="justify-between">
         <h5 className="font-lg lg:text-xl font-semibold font-sans">
           Hourly forecast
@@ -80,15 +89,13 @@ function HourlyForecast({ isLoading, hourly }: HourlyForecastProps) {
         </Dropdown>
       </CardHeader>
       <CardBody className="flex items-center justify-between gap-3 py-1">
-        {(hoursForecast ?? ["", "", "", "", "", "", "", ""]).map(
-          (item, index) => {
-            return (
-              <div className="w-full" key={String(index + "--key")}>
-                <HourCard isLoading={isLoading} hour_forecast={item} />
-              </div>
-            );
-          }
-        )}
+        {(hoursForecast ?? emptyForecast).map((item, index) => {
+          return (
+            <div className="w-full" key={String(index + "--key")}>
+              <HourCard isLoading={isLoading} hour_forecast={item} />
+            </div>
+          );
+        })}
       </CardBody>
     </Card>
   );

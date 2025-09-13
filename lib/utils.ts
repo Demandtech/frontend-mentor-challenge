@@ -20,7 +20,15 @@ export function getHourlyWeatherState(
   temperatures: number[],
   selectedDay: string
 ): Hourlytype[] {
-  if (!dates?.length) return [];
+
+  if (!dates?.length) {
+    return Array(8).fill({
+      temperature: null,
+      image_path: "",
+      image_alt: "",
+      time: "",
+    });
+  }
 
   return dates
     ?.map((date, index) => {
@@ -81,7 +89,7 @@ export function getDailyWeatherState(
   return state;
 }
 
-function getWeatherImagePath(code: number) {
+export function getWeatherImagePath(code: number) {
   switch (code) {
     case 0:
     case 1:

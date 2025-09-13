@@ -1,6 +1,6 @@
 "use client";
 
-import Image from "next/image";
+import { Image } from "@heroui/image";
 import { useEffect, useState } from "react";
 import {
   Dropdown,
@@ -102,11 +102,9 @@ function Header() {
       <div className="flex items-center justify-between w-full">
         <div className="relative w-full max-w-[170px] h-[80px]">
           <Image
-            fill
-            priority
             alt="Website(Weather Now) Logo"
             src={"/assets/images/logo.svg"}
-            className="w-auto h-auto"
+            className="w-full h-full"
           />
         </div>
 

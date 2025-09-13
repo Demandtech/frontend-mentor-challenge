@@ -1,10 +1,10 @@
-import { formatDate } from "@/lib/utils";
+import { formatDate, getWeatherImagePath } from "@/lib/utils";
 import { Card, CardBody } from "@heroui/card";
-import Image from "next/image";
 import React from "react";
 import CurrentForecastLoader from "./currentForecastloader";
 import { CurrentType } from "@/types";
 import { useApp } from "./context/AppContext";
+import { Image } from "@heroui/image";
 
 function CurrentForecast({
   isLoading = true,
@@ -14,33 +14,38 @@ function CurrentForecast({
   current: CurrentType;
 }) {
   const { state } = useApp();
+
+
   return (
     <div>
       {isLoading ? (
         <CurrentForecastLoader />
       ) : (
-        <Card
-          className={`bg-today bg-no-repeat bg-center py-10 lg:py-16 lg:min-h-[300px]`}
-        >
-          <CardBody className="px-5 items-center flex-row">
-            <div className="flex w-full justify-between items-center flex-col md:flex-row gap-5">
+        <Card className={`bg-today bg-no-repeat bg-center h-[236px] relative`}>
+          <Image
+            removeWrapper
+            src="/assets/images/bg-today-large.svg"
+            className="h-full w-full"
+          />
+          <CardBody className="px-5 items-center flex-row z-10 absolute top-1/2 -translate-y-1/2">
+            <div className="my-auto flex w-full justify-between items-center flex-col md:flex-row gap-5">
               <div className="text-center md:text-start md:max-w-1/2">
                 <h2 className="font-semibold text-[1.6rem] font-sans mb-1">
                   {current?.name}
                 </h2>
-                <p className="text-sm text-foreground/90 font-light">
+                <p className="text-sm text-neutral-100 font-light">
                   {formatDate(current?.time)}
                 </p>
               </div>
-              <div className="flex items-center gap-6">
+              <div className="flex items-center gap-6 -translate-x-2">
                 <Image
-                  priority
+                  // priority
                   alt="daily forecast icon"
-                  src="/assets/images/icon-sunny.webp"
+                  src={getWeatherImagePath(current.weather_code)}
                   width={100}
                   height={100}
                 />
-                <p className="text-8xl font-brico leading-10">
+                <p className="text-8xl font-brico leading-10 italic">
                   {Math.round(current?.temperature_2m)}°
                 </p>
               </div>
