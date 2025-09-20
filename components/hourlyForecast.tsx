@@ -49,8 +49,8 @@ function HourlyForecast({ isLoading, hourly }: HourlyForecastProps) {
   });
 
   return (
-    <Card className="bg-neutral-800 py-[0.56rem] px-2">
-      <CardHeader className="justify-between">
+    <Card className="bg-neutral-800 pt-3 pb-5 px-0 max-h-[607px] rounded-2xl custom-scrollbar">
+      <CardHeader className="justify-between pl-5 pr-6">
         <h5 className="font-lg lg:text-xl font-semibold font-sans">
           Hourly forecast
         </h5>
@@ -88,7 +88,7 @@ function HourlyForecast({ isLoading, hourly }: HourlyForecastProps) {
           </DropdownMenu>
         </Dropdown>
       </CardHeader>
-      <CardBody className="flex items-center justify-between gap-3 py-1">
+      <CardBody className="flex items-center justify-between gap-3 py-1 custom-scrollbar px-5">
         {(hoursForecast ?? emptyForecast).map((item, index) => {
           return (
             <div className="w-full" key={String(index + "--key")}>

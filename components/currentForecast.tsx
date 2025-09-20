@@ -20,11 +20,15 @@ function CurrentForecast({
       {isLoading ? (
         <CurrentForecastLoader />
       ) : (
-        <Card className={`lg:h-[236px] rounded-[26px] relative overflow-hidden`}>
+        <Card
+          radius="none"
+          className="w-full h-[271px] relative overflow-hidden bg-background "
+        >
           <Image
-            removeWrapper
+            height={271}
+            width={"100%"}
             src="/assets/images/bg-today-large.svg"
-            className="h-full w-full object-cover rounded-large"
+            className="h-full w-full object-cover bg-background"
             srcSet="/assets/images/bg-today-small.svg 600w, /assets/images/bg-today-large.svg 1200w"
           />
           <CardBody className="px-5 items-center flex-row z-10 absolute top-1/2 -translate-y-1/2">
@@ -33,7 +37,7 @@ function CurrentForecast({
                 <h2 className="font-semibold text-[1.6rem] font-sans mb-1">
                   {current?.name}
                 </h2>
-                <p className="text-sm text-neutral-100 font-light">
+                <p className="text-xs text-neutral-100 font-light">
                   {formatDate(current?.time)}
                 </p>
               </div>

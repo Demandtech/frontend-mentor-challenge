@@ -60,7 +60,7 @@ export function getHourlyWeatherState(
       image_alt,
       time,
     }))
-    .filter((_, index) => index % 3 == 0);
+    // .filter((_, index) => index % 3 == 0);
 }
 
 export function getDailyWeatherState(

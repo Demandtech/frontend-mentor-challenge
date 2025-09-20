@@ -9,17 +9,17 @@ import CurrentForecast from "@/components/currentForecast";
 import { useApp } from "@/components/context/AppContext";
 
 export default function Home() {
-  const { data, refetch } = useForecast();
-  const { isLoading, isError } = useApp();
+  const { data } = useForecast();
+  const { isLoading, isError, setIsError } = useApp();
 
   return (
     <section className="w-full">
       {isError ? (
-        <ApiError refetch={refetch} />
+        <ApiError />
       ) : (
         <div>
-          <div className="text-center w-full">
-            <h1 className="font-brico text-5xl font-semibold px-6 md:px-3 lg:px-0">
+          <div className="text-center w-full pt-10">
+            <h1 className="font-brico text-4xl lg:text-5xl font-semibold px-6 md:px-3 lg:px-0">
               How's the sky looking today?
             </h1>
             <SearchForm />
@@ -40,7 +40,7 @@ export default function Home() {
                   />
                   <DailyForecast isLoading={isLoading} daily={data?.daily} />
                 </div>
-                <div className="col-span-1">
+                <div className="col-span-1 h-full overflow-auto">
                   <HourlyForecast isLoading={isLoading} hourly={data?.hourly} />
                 </div>
               </div>

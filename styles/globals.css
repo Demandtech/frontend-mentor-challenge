@@ -34,27 +34,23 @@
   --color-primary: var(--color-neutral-700);
 }
 
-.bg-today {
-  @apply bg-[url('/assets/images/bg-today-small.svg')] md:bg-[url('/assets/images/bg-today-large.svg')] bg-cover bg-center;
-}
 
 .custom-scrollbar::-webkit-scrollbar {
-  width: 8px;
+  width: 3px;
+
 }
 
 .custom-scrollbar::-webkit-scrollbar-track {
-  background: var(--neutral-600);
-  border-radius: 4px;
+  background: var(--neutral-800);
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background-color: var(--neutral-800);
-  border-radius: 4px;
-  border: 2px solid var(--neutral-600);
+  background-color: var(--neutral-600);
+  border-radius: 1.5px;
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-  background-color: var(--neutral-900);
+  background-color: var(--neutral-700);
 }
 
 @keyframes bounce-high {
