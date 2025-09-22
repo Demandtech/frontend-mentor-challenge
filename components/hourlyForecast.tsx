@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useRef, useEffect } from "react";
 import {
   Dropdown,
   DropdownTrigger,
@@ -60,6 +60,7 @@ function HourlyForecast({ isLoading, hourly }: HourlyForecastProps) {
         >
           <DropdownTrigger>
             <Button
+              aria-label="Select forecast day"
               className="data-[focus=true]:outline-neutral-200 bg-neutral-600 capitalize text-foreground rounded-md"
               variant="solid"
               endContent={<DropdownIcon />}
@@ -88,12 +89,19 @@ function HourlyForecast({ isLoading, hourly }: HourlyForecastProps) {
           </DropdownMenu>
         </Dropdown>
       </CardHeader>
-      <CardBody className="flex items-center justify-between gap-3 py-1 custom-scrollbar px-5">
+      <CardBody
+        as="ul"
+        className="flex items-center justify-between gap-3 py-1 custom-scrollbar px-5"
+      >
         {(hoursForecast ?? emptyForecast).map((item, index) => {
           return (
-            <div className="w-full" key={String(index + "--key")}>
-              <HourCard isLoading={isLoading} hour_forecast={item} />
-            </div>
+            <li   key={String(index + "--key")} className="w-full">
+              <HourCard
+              
+                isLoading={isLoading}
+                hour_forecast={item}
+              />
+            </li>
           );
         })}
       </CardBody>

@@ -81,6 +81,8 @@ function SearchForm() {
 
   return (
     <form
+      role="search"
+      aria-label="Weather search"
       onSubmit={(e) => handleSubmit(e)}
       className="lg:max-w-[600px] w-full mx-auto mt-10"
     >
@@ -88,7 +90,10 @@ function SearchForm() {
         <div className="w-full relative">
           <div ref={listRef} className="w-full relative">
             <Input
-              aria-label="Search by place input"
+              id="place-search"
+              aria-label="Search for a place"
+              aria-controls="search-results"
+              aria-expanded={isOpen}
               startContent={<SearchIcon />}
               value={searchQuery ?? ""}
               onChange={handleInputChange}
@@ -122,7 +127,7 @@ function SearchForm() {
                         className="px-4 py-2 text-neutral-200 text-start"
                         aria-label="Searhing..."
                       >
-                        <div className="flex items-center gap-2">
+                        <div role="status" className="flex items-center gap-2">
                           <LoadingIcon className=" animate-spin" />
                           <span>Search in progres</span>
                         </div>
@@ -144,7 +149,7 @@ function SearchForm() {
                         aria-label="No results found"
                         className="px-4 py-2 text-neutral-400"
                       >
-                        No results found
+                        <span role="status">No results found</span>
                       </ListboxItem>
                     )}
                   </Listbox>
@@ -160,6 +165,9 @@ function SearchForm() {
           color="secondary"
           isDisabled={
             debouncedSearch.trim() == "" || debouncedSearch.trim().length < 2
+          }
+          aria-disabled={
+            debouncedSearch.trim() === "" || debouncedSearch.trim().length < 2
           }
         >
           Search

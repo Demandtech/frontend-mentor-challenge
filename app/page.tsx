@@ -10,7 +10,7 @@ import { useApp } from "@/components/context/AppContext";
 
 export default function Home() {
   const { data } = useForecast();
-  const { isLoading, isError, setIsError } = useApp();
+  const { isLoading, isError } = useApp();
 
   return (
     <section className="w-full">
@@ -19,7 +19,7 @@ export default function Home() {
       ) : (
         <div>
           <div className="text-center w-full pt-10">
-            <h1 className="font-brico text-4xl lg:text-5xl font-semibold px-6 md:px-3 lg:px-0">
+            <h1 className="font-brico leading-14 text-[3.2rem] font-semibold px-6 md:px-3 lg:px-0">
               How's the sky looking today?
             </h1>
             <SearchForm />

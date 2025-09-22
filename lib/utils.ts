@@ -14,12 +14,40 @@ export function formatDate(dateString: string) {
   return formatted;
 }
 
+export function getDailyWeatherState(
+  dates: string[],
+  codes: number[],
+  min_temperatures: number[],
+  max_temperatures: number[]
+): DailyType[] {
+  const state = dates?.map((date, index) => {
+    const day = new Date(date);
+
+    const formatted = day.toLocaleDateString("en-US", {
+      weekday: "short",
+    });
+
+    return {
+      day: formatted,
+      image_path: getWeatherImagePath(codes[index]),
+      min_temperature: min_temperatures[index],
+      max_temperature: max_temperatures[index],
+      image_alt: "Weather icon",
+    };
+  });
+
+  return state;
+}
+
 export function getHourlyWeatherState(
   dates: string[],
   codes: number[],
   temperatures: number[],
   selectedDay: string
 ): Hourlytype[] {
+  const today = new Date();
+  const currentHour = today.getHours();
+
   if (!dates?.length) {
     return Array(8).fill({
       temperature: null,
@@ -59,33 +87,8 @@ export function getHourlyWeatherState(
       image_path,
       image_alt,
       time,
-    }))
-    // .filter((_, index) => index % 3 == 0);
-}
-
-export function getDailyWeatherState(
-  dates: string[],
-  codes: number[],
-  min_temperatures: number[],
-  max_temperatures: number[]
-): DailyType[] {
-  const state = dates?.map((date, index) => {
-    const day = new Date(date);
-
-    const formatted = day.toLocaleDateString("en-US", {
-      weekday: "short",
-    });
-
-    return {
-      day: formatted,
-      image_path: getWeatherImagePath(codes[index]),
-      min_temperature: min_temperatures[index],
-      max_temperature: max_temperatures[index],
-      image_alt: "Weather icon",
-    };
-  });
-
-  return state;
+    }));
+  // .filter((_, index) => index % 3 == 0);
 }
 
 export function getWeatherImagePath(code: number) {

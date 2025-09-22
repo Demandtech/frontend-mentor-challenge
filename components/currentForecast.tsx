@@ -5,6 +5,7 @@ import CurrentForecastLoader from "./currentForecastloader";
 import { CurrentType } from "@/types";
 import { useApp } from "./context/AppContext";
 import { Image } from "@heroui/image";
+import NextImage from "next/image";
 
 function CurrentForecast({
   isLoading = true,
@@ -26,7 +27,9 @@ function CurrentForecast({
         >
           <Image
             height={271}
-            width={"100%"}
+            width="100%"
+            alt=""
+            role="presentation"
             src="/assets/images/bg-today-large.svg"
             className="h-full w-full object-cover bg-background"
             srcSet="/assets/images/bg-today-small.svg 600w, /assets/images/bg-today-large.svg 1200w"
@@ -43,13 +46,18 @@ function CurrentForecast({
               </div>
               <div className="flex items-center gap-6 -translate-x-2">
                 <Image
-                  // priority
-                  alt="daily forecast icon"
+                  alt={`Weather condition: ${current?.weather_code ?? "Unknown"}`}
                   src={getWeatherImagePath(current.weather_code)}
+                  as={NextImage}
                   width={100}
                   height={100}
                 />
-                <p className="text-8xl font-brico leading-10 italic">
+                <p
+                  aria-label={`Current temperature ${Math.round(
+                    current?.temperature_2m
+                  )} degrees Celsius`}
+                  className="text-8xl font-brico leading-10 italic"
+                >
                   {Math.round(current?.temperature_2m)}°
                 </p>
               </div>
@@ -57,49 +65,108 @@ function CurrentForecast({
           </CardBody>
         </Card>
       )}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-4 w-full mt-6">
-        <Card className="bg-neutral-800 border border-neutral-600">
-          <CardBody className="space-y-3 p-4">
-            <p className="text-nowrap text-sm text-neutral-200">Feels Like</p>
-            <p className="text-2xl font-sans font-light text-neutral">
-              {isLoading ? "_" : `${Math.round(current?.temperature_2m ?? 0)}°`}
-            </p>
-          </CardBody>
-        </Card>
-        <Card className="bg-neutral-800 border border-neutral-600">
-          <CardBody className="space-y-3 p-4">
-            <p className="text-nowrap text-sm text-neutral-200">Humidity</p>
-            <p className="text-2xl font-sans font-light text-neutral">
-              {" "}
-              {isLoading
-                ? "_"
-                : `${Math.round(current?.relative_humidity_2m ?? 0)}%`}
-            </p>
-          </CardBody>
-        </Card>
-        <Card className="bg-neutral-800 border border-neutral-600">
-          <CardBody className="space-y-3 p-4">
-            <p className="text-nowrap text-sm text-neutral-200">Wind</p>
-            <p className="text-2xl font-sans font-light text-neutral">
-              {isLoading
-                ? "_"
-                : `${Math.round(current?.wind_speed_10m ?? 0)} ${state?.wind === "kmh" ? "kmh" : "mph"}`}
-            </p>
-          </CardBody>
-        </Card>
-        <Card className="bg-neutral-800 border border-neutral-600">
-          <CardBody className="space-y-3 p-4">
-            <p className="text-nowrap text-sm text-neutral-200">
-              Precipitation
-            </p>
-            <p className="text-2xl font-sans font-light text-neutral">
-              {isLoading
-                ? "_"
-                : `${Math.round(current?.precipitation ?? 0)} ${state?.precipitation == "inch" ? "in" : "mm"}`}
-            </p>
-          </CardBody>
-        </Card>
-      </div>
+      <ul className="grid grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-4 w-full mt-6">
+        <li>
+          <Card
+            role="group"
+            aria-label="Feels Like Temperature"
+            className="bg-neutral-800 border border-neutral-600"
+          >
+            <CardBody className="space-y-3 p-4">
+              <p className="text-nowrap text-sm text-neutral-200">Feels Like</p>
+              <p
+                className="text-2xl font-sans font-light text-neutral"
+                aria-label={
+                  isLoading
+                    ? "Loading feels like temperature"
+                    : `Feels like ${Math.round(
+                        current?.temperature_2m ?? 0
+                      )} degrees ${state.temperature == "celsius" ? "celsius" : "fahrenheit"}`
+                }
+              >
+                {isLoading
+                  ? "_"
+                  : `${Math.round(current?.temperature_2m ?? 0)}°`}
+              </p>
+            </CardBody>
+          </Card>
+        </li>
+        <li>
+          <Card
+            role="group"
+            aria-label="Humidity"
+            className="bg-neutral-800 border border-neutral-600"
+          >
+            <CardBody className="space-y-3 p-4">
+              <p className="text-nowrap text-sm text-neutral-200">Humidity</p>
+              <p
+                className="text-2xl font-sans font-light text-neutral"
+                aria-label={
+                  isLoading
+                    ? "Loading humidity"
+                    : `Humidity ${Math.round(current?.relative_humidity_2m ?? 0)} percent`
+                }
+              >
+                {isLoading
+                  ? "_"
+                  : `${Math.round(current?.relative_humidity_2m ?? 0)}%`}
+              </p>
+            </CardBody>
+          </Card>
+        </li>
+        <li>
+          <Card
+            role="group"
+            aria-label="Wind Speed"
+            className="bg-neutral-800 border border-neutral-600"
+          >
+            <CardBody className="space-y-3 p-4">
+              <p className="text-nowrap text-sm text-neutral-200">Wind</p>
+              <p
+                className="text-2xl font-sans font-light text-neutral"
+                aria-label={
+                  isLoading
+                    ? "Loading wind speed"
+                    : `Wind speed ${Math.round(
+                        current?.wind_speed_10m ?? 0
+                      )} ${state?.wind === "kmh" ? "kilometers per hour" : "miles per hour"}`
+                }
+              >
+                {isLoading
+                  ? "_"
+                  : `${Math.round(current?.wind_speed_10m ?? 0)} ${state?.wind === "kmh" ? "kmh" : "mph"}`}
+              </p>
+            </CardBody>
+          </Card>
+        </li>
+        <li>
+          <Card
+            role="group"
+            aria-label="Wind Speed"
+            className="bg-neutral-800 border border-neutral-600"
+          >
+            <CardBody className="space-y-3 p-4">
+              <p className="text-nowrap text-sm text-neutral-200">
+                Precipitation
+              </p>
+              <p
+                className="text-2xl font-sans font-light text-neutral"
+                aria-label={
+                  isLoading
+                    ? "Loading precipitation"
+                    : `Precipitation ${Math.round(
+                        current?.precipitation ?? 0
+                      )} ${state?.precipitation == "inch" ? "inches" : "millimeters"}`
+                }
+              >
+                {isLoading
+                  ? "_"
+                  : `${Math.round(current?.precipitation ?? 0)} ${state?.precipitation == "inch" ? "in" : "mm"}`}
+              </p>
+            </CardBody>
+          </Card>
+        </li>
+      </ul>
     </div>
   );
 }

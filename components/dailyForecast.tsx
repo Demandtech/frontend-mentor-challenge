@@ -34,13 +34,13 @@ function DailyForecast({ isLoading, daily }: DailyForecastProps) {
         <h5 className="font-lg lg:text-xl font-semibold font-sans mb-3">
           Daily forecast
         </h5>
-        <div className="grid grid-cols-3 md:grid-cols-7 gap-3">
+        <ul className="grid grid-cols-3 md:grid-cols-7 gap-3">
           {(forecastData ?? emptyForcast).map((item, index) => (
-            <div key={String(index + "--key")}>
+            <li key={String(index + "--key")}>
               <DayCard isLoading={isLoading} day_forcast={item} />
-            </div>
+            </li>
           ))}
-        </div>
+        </ul>
       </div>
     </div>
   );

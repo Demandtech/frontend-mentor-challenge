@@ -1,6 +1,9 @@
 "use client";
 
 import { Image } from "@heroui/image";
+import { Link } from "@heroui/link";
+import NextImage from "next/image";
+import NextLink from "next/link";
 import { useEffect, useState } from "react";
 import {
   Dropdown,
@@ -100,13 +103,16 @@ function Header() {
   return (
     <header>
       <div className="flex items-center justify-between w-full">
-        <div className="relative w-full max-w-[170px]">
+        <Link href="/" as={NextLink} aria-label="Weather Now homepage">
           <Image
-            alt="Website(Weather Now) Logo"
+            alt="Weather Now"
             src={"/assets/images/logo.svg"}
-            className="w-full h-full"
+            as={NextImage}
+            height={37}
+            width={180}
+            role="Logo"
           />
-        </div>
+        </Link>
 
         <Dropdown
           placement="bottom-end"
@@ -122,7 +128,7 @@ function Header() {
               variant="solid"
               startContent={<UnitIcon />}
               endContent={<DropdownIcon />}
-              aria-label="Units dropdwon toggle button"
+              aria-label="Change measurement units"
             >
               Units
             </Button>
@@ -140,7 +146,8 @@ function Header() {
               key="measurement"
               hideSelectedIcon
               textValue={state.measurement == "Metric" ? "Imperial" : "Metric"}
-              // onPress={toggleMeasurement}
+              aria-checked={state.measurement === "Metric" ? false : true}
+              role="menuitemcheckbox"
               className="data-[focus-visible=true]:outline-neutral-200 data-[focus-visible=true]:outline-1"
             >
               Switch to {state.measurement == "Metric" ? "Imperial" : "Metric"}
@@ -152,6 +159,7 @@ function Header() {
               }}
               showDivider
               title="Temperature"
+              aria-label="Temperature units"
             >
               <DropdownItem
                 key="celsius"
