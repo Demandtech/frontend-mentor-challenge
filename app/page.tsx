@@ -12,6 +12,10 @@ export default function Home() {
   const { data } = useForecast();
   const { isLoading, isError } = useApp();
 
+  const noResult = !isLoading && !data && !isError;
+
+  console.log(isLoading)
+
   return (
     <section className="w-full">
       {isError ? (
@@ -25,7 +29,7 @@ export default function Home() {
             <SearchForm />
           </div>
           <div className="mt-5 lg:mt-10 w-full">
-            {!isLoading && !data && !isError ? (
+            {noResult ? (
               <div>
                 <p className="text-center font-semibold text-2xl">
                   No search result found!
@@ -40,7 +44,7 @@ export default function Home() {
                   />
                   <DailyForecast isLoading={isLoading} daily={data?.daily} />
                 </div>
-                <div className="col-span-1 h-full overflow-auto">
+                <div className="col-span-1">
                   <HourlyForecast isLoading={isLoading} hourly={data?.hourly} />
                 </div>
               </div>

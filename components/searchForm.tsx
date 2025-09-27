@@ -10,6 +10,7 @@ import LoadingIcon from "@/public/assets/images/icon-loading.svg";
 import { useDebounce } from "@/hooks/useDebounce";
 import { useGetPlaces } from "@/hooks/useGeoLoaction";
 import { useApp } from "./context/AppContext";
+import ErrorIcon from "@/public/assets/images/icon-error.svg";
 
 function SearchForm() {
   const listRef = useRef<HTMLDivElement>(null);
@@ -17,7 +18,12 @@ function SearchForm() {
   const [isOpen, setIsOpen] = useState(false);
   const [manualSelection, setManualSelection] = useState(false);
   const debouncedSearch = useDebounce(searchQuery, 500);
-  const { data: places, refetch, isFetching } = useGetPlaces(debouncedSearch);
+  const {
+    data: places,
+    refetch,
+    isFetching,
+    isError,
+  } = useGetPlaces(debouncedSearch);
   const [place, setPlace] = useState<{
     latitude: number;
     longitude: number;
@@ -130,6 +136,17 @@ function SearchForm() {
                         <div role="status" className="flex items-center gap-2">
                           <LoadingIcon className=" animate-spin" />
                           <span>Search in progres</span>
+                        </div>
+                      </ListboxItem>
+                    ) : isError ? (
+                      <ListboxItem
+                        textValue="Search in progress"
+                        className="px-4 py-2 text-neutral-200 text-start"
+                        aria-label="Searhing..."
+                      >
+                        <div role="status" className="flex items-center gap-2">
+                          <ErrorIcon />
+                          <span>Something went wrong, please try again!</span>
                         </div>
                       </ListboxItem>
                     ) : places && places?.length > 0 ? (

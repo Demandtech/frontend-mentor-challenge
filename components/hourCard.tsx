@@ -3,6 +3,7 @@
 import { Hourlytype } from "@/types";
 import { Card, CardBody } from "@heroui/card";
 import { Image } from "@heroui/image";
+import { Skeleton } from "@heroui/skeleton";
 import NextImage from "next/image";
 
 interface HourCardPropsType {
@@ -12,13 +13,17 @@ interface HourCardPropsType {
 
 function HourCard({ hour_forecast, isLoading }: HourCardPropsType) {
   return (
-    <Card
-      role="group"
-      aria-label={`Forecast for ${hour_forecast.time}, ${Math.round(hour_forecast.temperature)} degrees, ${hour_forecast.image_alt}`}
-      className="w-full px-2 bg-neutral-700 rounded-lg border border-neutral-600 flex-col h-[52px]"
+    <Skeleton
+      isLoaded={!isLoading}
+      className="dark h-13 bg-primary rounded-lg after:!bg-neutral-600
+    before:!via-neutral-800"
     >
-      {!isLoading && (
-        <CardBody className="w-full p-0 h-full">
+      <Card
+        role="group"
+        aria-label={`Forecast for ${hour_forecast.time}, ${Math.round(hour_forecast.temperature)} degrees, ${hour_forecast.image_alt}`}
+        className="w-full bg-neutral-700 rounded-lg border border-neutral-600 flex-col h-13"
+      >
+        <CardBody className="w-full px-2 py-0 h-full">
           <div className="flex w-full items-center my-auto">
             <Image
               src={hour_forecast?.image_path}
@@ -36,8 +41,8 @@ function HourCard({ hour_forecast, isLoading }: HourCardPropsType) {
             </span>
           </div>
         </CardBody>
-      )}
-    </Card>
+      </Card>
+    </Skeleton>
   );
 }
 

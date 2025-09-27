@@ -14,7 +14,7 @@ export interface ProvidersProps {
 
 const queryClient = new QueryClient();
 
-export function HeroUiProviders({ children, themeProps }: ProvidersProps) {
+export default function Providers({ children, themeProps }: ProvidersProps) {
   return (
     <QueryClientProvider client={queryClient}>
       <HeroUIProvider>

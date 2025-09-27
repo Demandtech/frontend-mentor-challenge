@@ -110,7 +110,6 @@ function Header() {
             as={NextImage}
             height={37}
             width={180}
-            role="Logo"
           />
         </Link>
 
@@ -124,6 +123,7 @@ function Header() {
         >
           <DropdownTrigger>
             <Button
+              type="button"
               className="data-[focus-visible=true]:outline-neutral-200 bg-neutral-800 text-foreground rounded-md"
               variant="solid"
               startContent={<UnitIcon />}

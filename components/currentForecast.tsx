@@ -22,16 +22,16 @@ function CurrentForecast({
         <CurrentForecastLoader />
       ) : (
         <Card
-          radius="none"
-          className="w-full h-[271px] relative overflow-hidden bg-background "
+          radius="lg"
+          className="dark bg-background w-full h-full max-h-[264px] relative overflow-hidden"
         >
           <Image
-            height={271}
+            height={264}
             width="100%"
             alt=""
             role="presentation"
             src="/assets/images/bg-today-large.svg"
-            className="h-full w-full object-cover bg-background"
+            className="dark h-full w-full object-cover"
             srcSet="/assets/images/bg-today-small.svg 600w, /assets/images/bg-today-large.svg 1200w"
           />
           <CardBody className="px-5 items-center flex-row z-10 absolute top-1/2 -translate-y-1/2">

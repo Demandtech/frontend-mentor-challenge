@@ -2,7 +2,7 @@ import { Card, CardBody } from "@heroui/card";
 
 function CurrentForecastLoader() {
   return (
-    <Card className={`bg-neutral-800  bg-no-repeat bg-center  min-h-[271px]`}>
+    <Card className={`bg-neutral-800  bg-no-repeat bg-center  min-h-[264px]`}>
       <CardBody className="h-full px-5 items-center flex-row">
         <div className="flex flex-col items-center justify-center w-full gap-1">
           <div className="flex space-x-2">

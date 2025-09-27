@@ -49,7 +49,7 @@ function HourlyForecast({ isLoading, hourly }: HourlyForecastProps) {
   });
 
   return (
-    <Card className="bg-neutral-800 pt-3 pb-5 px-0 max-h-[607px] rounded-2xl custom-scrollbar">
+    <Card className="bg-neutral-800 pt-3 pb-5 px-0  max-h-[600px] rounded-2xl custom-scrollbar overflow-auto">
       <CardHeader className="justify-between pl-5 pr-6">
         <h5 className="font-lg lg:text-xl font-semibold font-sans">
           Hourly forecast
@@ -95,12 +95,8 @@ function HourlyForecast({ isLoading, hourly }: HourlyForecastProps) {
       >
         {(hoursForecast ?? emptyForecast).map((item, index) => {
           return (
-            <li   key={String(index + "--key")} className="w-full">
-              <HourCard
-              
-                isLoading={isLoading}
-                hour_forecast={item}
-              />
+            <li key={String(index + "--key")} className="w-full">
+              <HourCard isLoading={isLoading} hour_forecast={item} />
             </li>
           );
         })}

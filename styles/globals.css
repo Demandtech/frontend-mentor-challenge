@@ -34,10 +34,8 @@
   --color-primary: var(--color-neutral-700);
 }
 
-
 .custom-scrollbar::-webkit-scrollbar {
   width: 3px;
-
 }
 
 .custom-scrollbar::-webkit-scrollbar-track {

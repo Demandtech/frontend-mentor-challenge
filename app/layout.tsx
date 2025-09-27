@@ -1,9 +1,8 @@
-
 import "@/styles/globals.css";
 import { Metadata, Viewport } from "next";
 import clsx from "clsx";
 
-import { HeroUiProviders } from "./providers";
+import Providers from "./providers";
 
 import { siteConfig } from "@/config/site";
 import { fontSans, fontBrico } from "@/config/fonts";
@@ -35,7 +34,6 @@ export default function RootLayout({
 }) {
   return (
     <html suppressHydrationWarning lang="en">
-      <head />
       <body
         className={clsx(
           "min-h-screen text-foreground bg-background antialiased",
@@ -43,9 +41,7 @@ export default function RootLayout({
           fontBrico.variable
         )}
       >
-        <HeroUiProviders
-          themeProps={{ attribute: "class", defaultTheme: "light" }}
-        >
+        <Providers themeProps={{ attribute: "class", defaultTheme: "light" }}>
           <div className="relative min-h-screen w-full">
             <div className="container max-w-7xl h-full py-5 lg:py-10 mx-auto px-4 md:px-8 lg:px-16">
               <Suspense>
@@ -56,7 +52,7 @@ export default function RootLayout({
               </main>
             </div>
           </div>
-        </HeroUiProviders>
+        </Providers>
       </body>
     </html>
   );
